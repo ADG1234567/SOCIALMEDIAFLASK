@@ -19,7 +19,7 @@ Aplicación web en Flask para subir publicaciones con texto, fotos, videos y aud
 pip install flask mysql-connector-python werkzeug
 ```
 
-2. Copia este proyecto en `c:\Users\ale30\Desktop\CRUDFLASK`.
+2. Copia este proyecto en `c:\Users\0\Desktop\CRUDFLASK`.
 
 3. Abre `app.py` y configura tu API Key de Google en `app.config['GOOGLE_API_KEY']`.
 
