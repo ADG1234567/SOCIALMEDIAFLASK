@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block title %}Verificación 2FA{% endblock %}
+{% block content %}
+<div class="auth-card">
+    <h2>Verificación de dos factores</h2>
+    <p>Introduce el código de 6 dígitos que recibiste.</p>
+    <form action="{{ url_for('two_factor') }}" method="post">
+        <label>Código 2FA</label>
+        <input type="text" name="2fa_code" maxlength="6" required>
+        <button type="submit" class="primary-button">Verificar</button>
+    </form>
+</div>
+{% endblock %}

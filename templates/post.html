@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% block title %}Publicación{% endblock %}
+{% block content %}
+<div class="post-detail-card">
+    <div class="post-header">
+        <img class="avatar" src="{{ url_for('static', filename='profile_pics/' ~ (post.author_pic or 'default_avatar.png')) }}" alt="Perfil">
+        <div>
+            <h2>{{ post.author_name }}</h2>
+            <span>{{ post.created_at }}</span>
+        </div>
+    </div>
+    <div class="post-body">
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.body }}</p>
+        {% if post.media_filename %}
+            {% if 'image' in post.media_type %}
+                <img class="post-media" src="{{ url_for('static', filename='uploads/' ~ post.media_filename) }}" alt="Media">
+            {% elif 'video' in post.media_type %}
+                <video class="post-media" controls><source src="{{ url_for('static', filename='uploads/' ~ post.media_filename) }}" type="{{ post.media_type }}"></video>
+            {% elif 'audio' in post.media_type %}
+                <audio controls><source src="{{ url_for('static', filename='uploads/' ~ post.media_filename) }}" type="{{ post.media_type }}"></audio>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="comments-section">
+        <h3>Comentarios</h3>
+        {% for comment in comments %}
+            <div class="comment-card">
+                <img class="avatar" src="{{ url_for('static', filename='profile_pics/' ~ (comment.commenter_pic or 'default_avatar.png')) }}" alt="Perfil">
+                <div>
+                    <strong>{{ comment.commenter_name }}</strong>
+                    <p>{{ comment.content }}</p>
+                    <span>{{ comment.created_at }}</span>
+                </div>
+            </div>
+        {% else %}
+            <p>No hay comentarios aún.</p>
+        {% endfor %}
+    </div>
+    {% if session.get('user_id') %}
+        <form class="comment-form" action="{{ url_for('comment', post_id=post.id) }}" method="post">
+            <textarea name="content" placeholder="Escribe un comentario..."></textarea>
+            <button type="submit" class="primary-button">Comentar</button>
+        </form>
+    {% else %}
+        <p><a href="{{ url_for('login') }}">Inicia sesión</a> para comentar.</p>
+    {% endif %}
+</div>
+{% endblock %}

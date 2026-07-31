@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% block title %}Panel de administrador{% endblock %}
+{% block content %}
+<div class="admin-grid">
+    <section class="admin-card">
+        <h2>Usuarios</h2>
+        <table class="admin-table">
+            <thead>
+                <tr><th>Nombre</th><th>Correo</th><th>Admin</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user[1] }}</td>
+                    <td>{{ user[2] }}</td>
+                    <td>{{ 'Sí' if user[3] else 'No' }}</td>
+                    <td><a href="{{ url_for('admin_edit_user', user_id=user[0]) }}">Editar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    <section class="admin-card">
+        <h2>Publicaciones</h2>
+        <table class="admin-table">
+            <thead>
+                <tr><th>Título</th><th>Autor</th><th>Fecha</th><th>Acción</th></tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                <tr>
+                    <td>{{ post[1] }}</td>
+                    <td>{{ post[3] }}</td>
+                    <td>{{ post[2] }}</td>
+                    <td><a class="danger-link" href="{{ url_for('admin_delete_post', post_id=post[0]) }}">Borrar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</div>
+{% endblock %}

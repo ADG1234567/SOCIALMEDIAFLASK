@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block title %}Editar perfil{% endblock %}
+{% block content %}
+<div class="profile-card">
+    <h2>Editar perfil</h2>
+    <form action="{{ url_for('profile') }}" method="post" enctype="multipart/form-data">
+        <label>Nombre</label>
+        <input type="text" name="name" value="{{ user.name }}" required>
+        <label>Correo</label>
+        <input type="email" name="email" value="{{ user.email }}" required>
+        <label>Foto de perfil</label>
+        <input type="file" name="profile_pic" accept="image/png,image/jpeg,image/gif">
+        <label>Modo</label>
+        <select name="theme">
+            <option value="light" {% if theme == 'light' %}selected{% endif %}>Claro</option>
+            <option value="dark" {% if theme == 'dark' %}selected{% endif %}>Oscuro</option>
+        </select>
+        <button type="submit" class="primary-button">Guardar cambios</button>
+    </form>
+</div>
+{% endblock %}

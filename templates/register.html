@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block title %}Registro{% endblock %}
+{% block content %}
+<div class="auth-card">
+    <h2>Crear cuenta</h2>
+    <form action="{{ url_for('register') }}" method="post" enctype="multipart/form-data">
+        <label>Nombre</label>
+        <input type="text" name="name" required>
+        <label>Correo electrónico</label>
+        <input type="email" name="email" required>
+        <label>Contraseña</label>
+        <input type="password" name="password" required>
+        <label>Foto de perfil</label>
+        <input type="file" name="profile_pic" accept="image/png,image/jpeg,image/gif">
+        <button type="submit" class="primary-button">Registrarme</button>
+    </form>
+    <div class="auth-footer">
+        <a href="{{ url_for('login') }}">Ya tengo cuenta</a>
+    </div>
+</div>
+{% endblock %}

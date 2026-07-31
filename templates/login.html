@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block title %}Iniciar sesión{% endblock %}
+{% block content %}
+<div class="auth-card">
+    <h2>Iniciar sesión</h2>
+    <form action="{{ url_for('login') }}" method="post">
+        <label>Correo electrónico</label>
+        <input type="email" name="email" required>
+        <label>Contraseña</label>
+        <input type="password" name="password" required>
+        <button type="submit" class="primary-button">Continuar</button>
+    </form>
+    <div class="auth-footer">
+        <a href="{{ url_for('register') }}">Crear cuenta</a>
+    </div>
+    <div class="api-note">API Google 2FA: {{ api_key or 'Pega tu API Key en app.py' }}</div>
+</div>
+{% endblock %}
